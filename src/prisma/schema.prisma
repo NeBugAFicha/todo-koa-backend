@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model grants {
+  id                    Int                     @id @db.SmallInt
+  name                  String                  @unique @db.VarChar(50)
+  user_grant_task_lists user_grant_task_lists[]
+}
+
+model task_lists {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  tasks                 tasks[]
+  user_grant_task_lists user_grant_task_lists[]
+}
+
+model tasks {
+  id           Int        @id @default(autoincrement())
+  name         String     @db.VarChar(255)
+  task_list_id Int
+  task_lists   task_lists @relation(fields: [task_list_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model user_grant_task_lists {
+  task_list_id Int
+  user_id      Int
+  grant_id     Int
+  grants       grants     @relation(fields: [grant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  task_lists   task_lists @relation(fields: [task_list_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  users        users      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([user_id, grant_id], map: "user_grant_task_lists_user_id_grant_id_idx")
+}
+
+model users {
+  id                    Int                     @id @default(autoincrement())
+  login                 String                  @unique @db.VarChar(255)
+  password              String                  @db.VarChar(255)
+  user_grant_task_lists user_grant_task_lists[]
+}
