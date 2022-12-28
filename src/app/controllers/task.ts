@@ -1,8 +1,12 @@
 import db from '../db/database';
 import { Grants } from '../grants';
+import { Context, RouteInterface, ControllerMethods } from '../controllerType';
 
-class Task {
-    static async checkGrants(ctx: any, params: any){
+import { TaskControllerType } from '../types/taskControllerType';
+
+export type Methods = ControllerMethods<TaskControllerType>;
+class Task implements Methods{
+    static async checkGrants(ctx: Context<RouteInterface>, params:  {[key: string]: number}){
         const {user_id, grant_id, task_list_id} = params; 
         const task_list = await db.user_grant_task_lists.findFirst({
             where: {
@@ -10,52 +14,51 @@ class Task {
                 grant_id: {
                     in: [Grants.Owner, grant_id]
                 },
-                task_list_id,
+                task_list_id: Number(task_list_id),
             }     
         })
 
         if(!task_list){
-            ctx.throw(403, `No ${Grants[grant_id]} or Owner Grant`)
+            ctx.throw(403, `No ${Grants[grant_id]} Grant or task list doesnt exist`)
         }
     }
-    async create(ctx: any){
+
+    create: Methods['create'] = async (ctx)=>{
         const {task_list_id} = ctx.request.params;
         const {user_id} = ctx.request;
-    
+
         await Task.checkGrants(ctx, {task_list_id, user_id, grant_id: Grants.Create});
         
         const {name} = ctx.request.body;
         const result = await db.tasks.create({
-            data: {name, task_list_id}
+            data: {name, task_list_id: Number(task_list_id)}
         });
 
         ctx.body = {data: result};
     }
 
-    async findById(ctx: any){
+    findById: Methods['findById'] = async (ctx)=>{
         const {task_list_id, id} = ctx.request.params;
         const {user_id} = ctx.request;
 
         await Task.checkGrants(ctx, {task_list_id, user_id, grant_id: Grants.Read});
-        const result = await db.tasks.findFirst({ where: { id } });
+        const result = await db.tasks.findFirst({ where: { id: Number(id) } });
 
         ctx.body = {data: result};
     }
 
-    async delete(ctx: any){
+    delete: Methods['delete'] = async (ctx)=>{
         const {task_list_id, id} = ctx.request.params;
         const {user_id} = ctx.request;
 
         await Task.checkGrants(ctx, {task_list_id, user_id, grant_id: Grants.Delete});
 
-        const result = await db.tasks.delete({
-            where: {id}
-        })
+        const result = await db.tasks.delete({ where: { id: Number(id) } })
 
         ctx.body = { data: result };
     }
 
-    async update(ctx: any){
+    update: Methods['update'] = async (ctx)=>{
         const {task_list_id, id} = ctx.request.params;
         const {user_id} = ctx.request;
 
@@ -63,7 +66,7 @@ class Task {
 
         const {name} = ctx.request.body;
         const result = await db.tasks.update({
-            where: {id},
+            where: { id: Number(id) },
             data: {name}
         })
 

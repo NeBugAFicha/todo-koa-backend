@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres_prisma:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: node_prisma
+
+  nodejs:
+    build: .
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres_prisma
+    environment:
+      DATABASE_URL: postgresql://admin:password123@postgres_prisma/node_prisma?schema=public&sslmode=prefer
+      JWT_SECRET_KEY: SECRET_KEY

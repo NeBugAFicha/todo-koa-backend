@@ -1,10 +1,10 @@
 import db from '../db/database';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserControllerInterface } from '../types/user';
-import { ControllerMethods } from '../types/controllerType'
-type Methods = ControllerMethods<UserControllerInterface>;
+import { ControllerMethods } from '../controllerType';
+import { UserControllerType } from '../types/userControllerType';
 
+export type Methods = ControllerMethods<UserControllerType>;
 class User implements Methods{
     registration: Methods['registration'] = async (ctx)=>{   
         let {login, password} = ctx.request.body;
@@ -31,7 +31,6 @@ class User implements Methods{
 
         ctx.body = { data: { message: 'Valid credentials', token } };
     }
-
 };
 
 export default new User();

@@ -1,4 +1,4 @@
-export type UserControllerInterface = {
+export type UserControllerType = {
     registration: {
         body: {
             login: string;
@@ -11,6 +11,4 @@ export type UserControllerInterface = {
             password: string;
         }
     }
-}
-
-
+};
