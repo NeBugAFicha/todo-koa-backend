@@ -4,7 +4,8 @@
   "description": "test_backend",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "prod": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=development node dist/index.js",
     "build": "tsc",
     "migrate": "npx prisma migrate dev --name init",
     "resetdb": "npx prisma migrate reset"

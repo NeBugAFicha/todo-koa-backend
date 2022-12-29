@@ -2,8 +2,6 @@ import db from '../db/database';
 import {Grants} from '../grants';
 import { ControllerMethods } from '../controllerType';
 import { TaskListControllerType } from '../types/taskListControllerType';
-import user from './user';
-import { Prisma } from '@prisma/client';
 
 export type Methods = ControllerMethods<TaskListControllerType>;
 class TaskList implements Methods{
@@ -37,6 +35,7 @@ class TaskList implements Methods{
                     },
                 },
             },
+            distinct: ['task_list_id'],
             where: {
                 user_id,
                 ...grantCondition
@@ -60,7 +59,7 @@ class TaskList implements Methods{
             },
             where: {
                 user_id,
-                task_list_id: Number(id),
+                task_list_id: id ,
             },
         })
 
@@ -70,7 +69,7 @@ class TaskList implements Methods{
     delete: Methods['delete'] = async (ctx)=>{
         const {id} = ctx.request.params;
 
-        const result = await db.task_lists.delete({where: {id: Number(id)}})
+        const result = await db.task_lists.delete({where: {id}})
 
         ctx.body = { data: result };
     }
@@ -80,17 +79,18 @@ class TaskList implements Methods{
         const {user_id} = ctx.request;
 
         const result = await db.user_grant_task_lists.findMany({
-            where: {
-                grant_id: Number(list_id) === user_id ? Grants.Owner : Grants.Read,
-                user_id: Number(list_id),
-            },
-            include: {
+            select: {
+                task_list_id: false,
                 task_lists: {
                     include: {
-                        tasks: true
-                    }
+                        tasks: true,
+                    },
                 },
-            }
+            },
+            where: {
+                grant_id: list_id === user_id ? Grants.Owner : Grants.Read,
+                user_id: list_id,
+            },
         })
 
         ctx.body = { data: result };

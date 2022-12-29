@@ -14,7 +14,7 @@ class Task implements Methods{
                 grant_id: {
                     in: [Grants.Owner, grant_id]
                 },
-                task_list_id: Number(task_list_id),
+                task_list_id,
             }     
         })
 
@@ -31,7 +31,7 @@ class Task implements Methods{
         
         const {name} = ctx.request.body;
         const result = await db.tasks.create({
-            data: {name, task_list_id: Number(task_list_id)}
+            data: {name, task_list_id}
         });
 
         ctx.body = {data: result};
@@ -42,7 +42,7 @@ class Task implements Methods{
         const {user_id} = ctx.request;
 
         await Task.checkGrants(ctx, {task_list_id, user_id, grant_id: Grants.Read});
-        const result = await db.tasks.findFirst({ where: { id: Number(id) } });
+        const result = await db.tasks.findFirst({ where: { id } });
 
         ctx.body = {data: result};
     }
@@ -53,7 +53,7 @@ class Task implements Methods{
 
         await Task.checkGrants(ctx, {task_list_id, user_id, grant_id: Grants.Delete});
 
-        const result = await db.tasks.delete({ where: { id: Number(id) } })
+        const result = await db.tasks.delete({ where: { id } })
 
         ctx.body = { data: result };
     }
@@ -66,7 +66,7 @@ class Task implements Methods{
 
         const {name} = ctx.request.body;
         const result = await db.tasks.update({
-            where: { id: Number(id) },
+            where: { id },
             data: {name}
         })
 

@@ -3,10 +3,11 @@ import {Context, RouteInterface} from '../controllerType';
 export default (schema: RouteInterface) => {
     return async (ctx: Context<RouteInterface>, next: Next) => {
         for(const part in schema){
-            const validation = schema[part].validate(ctx.request[part])
-            if(validation.error){
-                ctx.throw(400, JSON.stringify({name: 'Validation Error', details: validation.error.details}));
+            const {error, value} = schema[part].validate(ctx.request[part])
+            if(error){
+                ctx.throw(400, JSON.stringify({name: 'Validation Error', details: error.details}));
             }
+            Object.keys(value).forEach(key=>ctx.request[part][key] = value[key])
         }
         await next();
     }

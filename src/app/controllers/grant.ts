@@ -11,7 +11,7 @@ class Grant implements Methods{
         const result = await db.user_grant_task_lists.findFirst({
             where: {
                 grant_id: Grants.Owner,
-                task_list_id: Number(task_list_id),
+                task_list_id,
             }     
         })
 
@@ -29,11 +29,11 @@ class Grant implements Methods{
         const {user_id} = ctx.request.query;
         
         await Grant.checkOwner(ctx, {user_id, task_list_id});
-        console.log(task_list_id, user_id);
+
         const result = await db.user_grant_task_lists.create({
-            data: {user_id: Number(user_id), task_list_id: Number(task_list_id), grant_id: Grants.Create}
+            data: {user_id, task_list_id, grant_id: Grants.Create}
         });
-        console.log(result);
+
         ctx.body = {data: result};
     }
 
@@ -44,7 +44,7 @@ class Grant implements Methods{
         await Grant.checkOwner(ctx, {user_id, task_list_id});
 
         const result = await db.user_grant_task_lists.create({
-            data: {user_id: Number(user_id), task_list_id: Number(task_list_id), grant_id: Grants.Read}
+            data: {user_id, task_list_id, grant_id: Grants.Read}
         });
 
         ctx.body = {data: result};
@@ -57,7 +57,7 @@ class Grant implements Methods{
         await Grant.checkOwner(ctx, {user_id, task_list_id});
 
         const result = await db.user_grant_task_lists.create({
-            data: {user_id: Number(user_id), task_list_id: Number(task_list_id), grant_id: Grants.Update}
+            data: {user_id, task_list_id, grant_id: Grants.Update}
         });
 
         ctx.body = {data: result};
@@ -70,7 +70,7 @@ class Grant implements Methods{
         await Grant.checkOwner(ctx, {user_id, task_list_id});
 
         const result = await db.user_grant_task_lists.create({
-            data: {user_id: Number(user_id), task_list_id: Number(task_list_id), grant_id: Grants.Delete}
+            data: {user_id, task_list_id, grant_id: Grants.Delete}
         });
 
         ctx.body = {data: result};

@@ -6,7 +6,7 @@ export default {
             'task_list_id': Joi.number().positive().required(),
         }),
         query: Joi.object().keys({
-            'user_id': Joi.string().min(1).max(50).required().description('Идентификатор пользователя'),
+            'user_id': Joi.number().positive().required().description('Идентификатор пользователя'),
         })
     },
     readGrant: {
@@ -14,7 +14,7 @@ export default {
             'task_list_id': Joi.number().positive().required(),
         }),
         query: Joi.object().keys({
-            'user_id': Joi.string().min(1).max(50).required().description('Идентификатор пользователя'),
+            'user_id': Joi.number().positive().required().description('Идентификатор пользователя'),
         })
     },
     updateGrant: {
@@ -22,7 +22,7 @@ export default {
             'task_list_id': Joi.number().positive().required(),
         }),
         query: Joi.object().keys({
-            'user_id': Joi.string().min(1).max(50).required().description('Идентификатор пользователя'),
+            'user_id': Joi.number().positive().required().description('Идентификатор пользователя'),
         })
     },
     deleteGrant: {
@@ -30,7 +30,7 @@ export default {
             'task_list_id': Joi.number().positive().required(),
         }),
         query: Joi.object().keys({
-            'user_id': Joi.string().min(1).max(50).required().description('Идентификатор пользователя'),
+            'user_id': Joi.number().positive().required().description('Идентификатор пользователя'),
         })
     },
 }

@@ -15,14 +15,6 @@ export default {
             'id': Joi.number().positive().required(),
         }),
     },
-    findAll: {
-        params: Joi.object().keys({
-            'task_list_id': Joi.number().positive().required(),
-        }),
-        body: Joi.object().keys({
-            'my_list': Joi.boolean().required().description('Флаг принадлежности списков задач'),
-        })
-    },
     delete: {
         params: Joi.object().keys({
             'task_list_id': Joi.number().positive().required(),

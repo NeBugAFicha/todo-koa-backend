@@ -3,10 +3,7 @@ import Koa from "koa";
 import parser from "koa-bodyparser";
 import cors from "@koa/cors";
 import db from './db/database';
-import taskListRouter from './routers/taskListRouter';
-import taskRouter from './routers/taskRouter';
-import userRouter from "./routers/userRouter";
-import grantRouter from './routers/grantRouter';
+import * as routers from './allRouters';
 import {Next} from 'koa'
 import {Context, RouteInterface} from './controllerType';
 
@@ -29,10 +26,9 @@ app.use(async (ctx: Context<RouteInterface>, next: Next)=>{
     };
 })
 
-app.use(grantRouter.routes());
-app.use(userRouter.routes());
-app.use(taskListRouter.routes());
-app.use(taskRouter.routes());
+for(const router in routers){
+    app.use(routers[router].routes());
+}
 
 app.listen(port, async () => {
   try {
