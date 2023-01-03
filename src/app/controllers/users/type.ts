@@ -1,4 +1,4 @@
-export type UserControllerType = {
+export type Type = {
     registration: {
         body: {
             login: string;

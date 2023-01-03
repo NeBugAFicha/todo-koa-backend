@@ -1,6 +1,8 @@
 import Joi from "joi";
+import { SchemaType } from '../Types';
+import {Type} from './type';
 
-export default {
+export const Schema: SchemaType<Type> = {
     registration: {
         body: Joi.object().keys({
             'login': Joi.string().min(1).max(50).required().description('Логин пользователя'),

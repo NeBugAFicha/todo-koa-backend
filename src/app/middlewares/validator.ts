@@ -1,5 +1,5 @@
 import {Next} from 'koa'
-import {Context, RouteInterface} from '../controllerType';
+import {Context, RouteInterface} from '../controllers/Types';
 export default (schema: RouteInterface) => {
     return async (ctx: Context<RouteInterface>, next: Next) => {
         for(const part in schema){

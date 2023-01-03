@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import {Next} from 'koa'
-import {Context, RouteInterface} from '../controllerType';
+import {Context, RouteInterface} from '../controllers/Types';
 
 export default async (ctx: Context<RouteInterface>, next: Next) => {
     const userData = jwt.verify(ctx.request.headers.token, process.env.JWT_SECRET_KEY);

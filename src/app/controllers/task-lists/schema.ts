@@ -1,6 +1,8 @@
 import Joi from 'joi';
+import { SchemaType } from '../Types';
+import {Type} from './type';
 
-export default {
+export const Schema: SchemaType<Type> =  {
     create: {
         body: Joi.object().keys({
             'name': Joi.string().min(1).max(50).required().description('Название списка задач'),
@@ -22,8 +24,8 @@ export default {
         }),
     },
     findAllByList: {
-        params: Joi.object().keys({
-            'list_id': Joi.number().positive().required().description('Идентификтор листа списков задач'),
+        query: Joi.object().keys({
+            'list_id': Joi.number().positive().description('Идентификтор листа списков задач'),
         }),
     },
 }

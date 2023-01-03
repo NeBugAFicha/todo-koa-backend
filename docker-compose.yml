@@ -7,7 +7,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password123
       POSTGRES_DB: node_prisma
-
+    ports:
+      - 6532:5432
   nodejs:
     build: .
     image: nodejs
@@ -18,5 +19,6 @@ services:
     depends_on:
       - postgres_prisma
     environment:
-      DATABASE_URL: postgresql://admin:password123@postgres_prisma/node_prisma?schema=public&sslmode=prefer
+      DATABASE_URL: postgresql://admin:password123@postgres_prisma/node_prisma?schema=public&sslmode=prefer&&connection_limit=1
       JWT_SECRET_KEY: SECRET_KEY
+      PORT: 8000

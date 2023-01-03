@@ -1,6 +1,8 @@
 import Joi from "joi";
+import { SchemaType } from '../Types';
+import {Type} from './type';
 
-export default {
+export const Schema: SchemaType<Type> = {
     create: {
         params: Joi.object().keys({
             'task_list_id': Joi.number().positive().required(),

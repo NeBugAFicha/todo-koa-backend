@@ -1,11 +1,14 @@
-import db from '../db/database';
+import db from '../../db/database';
 import { Grants } from '../grants';
-import { Context, RouteInterface, ControllerMethods } from '../controllerType';
+import { Context, RouteInterface, ControllerMethods } from '../Types';
+import { Type } from './type';
+import { Router } from './router';
+import { Schema } from './schema';
 
-import { TaskControllerType } from '../types/taskControllerType';
-
-export type Methods = ControllerMethods<TaskControllerType>;
+type Methods = ControllerMethods<Type>;
 class Task implements Methods{
+    readonly router = Router;
+    readonly schema = Schema;
     static async checkGrants(ctx: Context<RouteInterface>, params:  {[key: string]: number}){
         const {user_id, grant_id, task_list_id} = params; 
         const task_list = await db.user_grant_task_lists.findFirst({
@@ -74,4 +77,4 @@ class Task implements Methods{
     }
 };
 
-export default new Task();
+export const task = new Task();

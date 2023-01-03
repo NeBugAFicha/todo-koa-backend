@@ -1,11 +1,15 @@
-import db from '../db/database';
+import db from '../../db/database';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { ControllerMethods } from '../controllerType';
-import { UserControllerType } from '../types/userControllerType';
+import { ControllerMethods } from '../Types';
+import { Type } from './type';
+import { Router } from './router';
+import { Schema } from './schema';
 
-export type Methods = ControllerMethods<UserControllerType>;
+type Methods = ControllerMethods<Type>;
 class User implements Methods{
+    readonly router = Router;
+    readonly schema = Schema;
     registration: Methods['registration'] = async (ctx)=>{   
         let {login, password} = ctx.request.body;
         password = await bcrypt.hash(password,3);
@@ -33,4 +37,4 @@ class User implements Methods{
     }
 };
 
-export default new User();
+export const user = new User();

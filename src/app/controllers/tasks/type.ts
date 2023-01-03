@@ -1,6 +1,5 @@
-export type TaskControllerType = {
+export type Type = {
     create: {
-        user_id: number,
         params: {
             task_list_id: number,
         },
@@ -9,21 +8,18 @@ export type TaskControllerType = {
         }
     },
     findById: {
-        user_id: number,
         params: {
             task_list_id: number,
             id: number,
         },
     },
     delete: {
-        user_id: number,
         params: {
             task_list_id: number,
             id: number,
         },
     },
     update: {
-        user_id: number,
         params: {
             task_list_id: number,
             id: number,
