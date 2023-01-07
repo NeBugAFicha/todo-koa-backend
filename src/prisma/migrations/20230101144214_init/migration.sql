@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "grants" (
     "id" SMALLINT NOT NULL,
-    "name" VARCHAR(50) NOT NULL,
+    "name" VARCHAR(100) NOT NULL,
 
     CONSTRAINT "grants_pkey" PRIMARY KEY ("id")
 );
@@ -66,31 +66,33 @@ INSERT INTO public.grants VALUES (3, 'Read');
 INSERT INTO public.grants VALUES (4, 'Update');
 INSERT INTO public.grants VALUES (5, 'Delete');
 
-INSERT INTO public.users VALUES (1, 'EgorDeveloper', '$2b$04$e6LR1D/wcLPybmor5hlBNej93egKNvXJKpgWR4pBu.g6eYaJsUeRi');
-INSERT INTO public.users VALUES (2, 'AnotherUser', '$2b$04$xYMwPzNq/isutO/FziBIwe23ZYflkc9yh6NTyJdK0BPB2keVX0Dq6');
+INSERT INTO public.users(login, password) VALUES ('EgorDeveloper', '$2b$04$e6LR1D/wcLPybmor5hlBNej93egKNvXJKpgWR4pBu.g6eYaJsUeRi');
+INSERT INTO public.users(login, password) VALUES ('AnotherUser', '$2b$04$xYMwPzNq/isutO/FziBIwe23ZYflkc9yh6NTyJdK0BPB2keVX0Dq6');
 
 
-INSERT INTO public.task_lists VALUES (2, 'task_list');
-INSERT INTO public.task_lists VALUES (5, 'task_list_another_task');
-INSERT INTO public.task_lists VALUES (6, 'task_list_another2');
-INSERT INTO public.task_lists VALUES (7, 'task_list_another3');
+INSERT INTO public.task_lists(name) VALUES ('task_list');
+INSERT INTO public.task_lists(name) VALUES ('task_list_another_task');
+INSERT INTO public.task_lists(name) VALUES ('task_list_another2');
+INSERT INTO public.task_lists(name) VALUES ('task_list_another3');
 
-INSERT INTO public.user_grant_task_lists VALUES (2, 1, 1);
-INSERT INTO public.user_grant_task_lists VALUES (5, 2, 1);
-INSERT INTO public.user_grant_task_lists VALUES (5, 1, 2);
-INSERT INTO public.user_grant_task_lists VALUES (5, 1, 4);
-INSERT INTO public.user_grant_task_lists VALUES (6, 2, 1);
-INSERT INTO public.user_grant_task_lists VALUES (7, 2, 1);
-INSERT INTO public.user_grant_task_lists VALUES (2, 2, 3);
-INSERT INTO public.user_grant_task_lists VALUES (2, 2, 4);
-INSERT INTO public.user_grant_task_lists VALUES (2, 2, 5);
+INSERT INTO public.user_grant_task_lists VALUES (1, 1, 1);
+INSERT INTO public.user_grant_task_lists VALUES (2, 2, 1);
+INSERT INTO public.user_grant_task_lists VALUES (2, 1, 2);
+INSERT INTO public.user_grant_task_lists VALUES (2, 1, 4);
+INSERT INTO public.user_grant_task_lists VALUES (3, 2, 1);
+INSERT INTO public.user_grant_task_lists VALUES (4, 2, 1);
+INSERT INTO public.user_grant_task_lists VALUES (1, 2, 3);
+INSERT INTO public.user_grant_task_lists VALUES (1, 2, 4);
+INSERT INTO public.user_grant_task_lists VALUES (1, 2, 5);
 
-INSERT INTO public.tasks VALUES (6, 'task_list_task_task2', 5);
-INSERT INTO public.tasks VALUES (7, 'task_list_task_task2', 5);
-INSERT INTO public.tasks VALUES (8, 'task_list_another_task_task', 5);
-INSERT INTO public.tasks VALUES (9, 'task_list_another2_task', 6);
-INSERT INTO public.tasks VALUES (10, 'task_list_another2_task2', 6);
-INSERT INTO public.tasks VALUES (11, 'task_list_another3_task', 7);
-INSERT INTO public.tasks VALUES (12, 'task_list_another3_task2', 7);
-INSERT INTO public.tasks VALUES (5, 'task_list_another_task_task_updated', 5);
-INSERT INTO public.tasks VALUES (13, 'task_list_task4', 2);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another_task_task_updated', 2);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_task_task2', 2);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_task_task2', 2);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another_task_task', 2);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another2_task', 3);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another2_task2', 3);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another3_task', 4);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_another3_task2', 4);
+INSERT INTO public.tasks(name, task_list_id) VALUES ('task_list_task4', 1);
+
+
