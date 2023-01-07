@@ -30,7 +30,6 @@ class Grant implements Methods{
     grant: Methods['grant'] = async (ctx)=> {
         const {task_list_id} = ctx.request.params;
         const {grant, user_id, take_off} = ctx.request.query;
-        console.log(grant);
         await Grant.checkOwner(ctx, {user_id, task_list_id});
 
         let result;

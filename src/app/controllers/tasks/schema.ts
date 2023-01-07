@@ -8,7 +8,7 @@ export const Schema: SchemaType<Type> = {
             'task_list_id': Joi.number().positive().required(),
         }),
         body: Joi.object().keys({
-            'name': Joi.string().min(1).max(50).required().description('Название задачи'),
+            'name': Joi.string().min(1).max(255).required().description('Название задачи'),
         })
     },
     findById: {
@@ -29,7 +29,7 @@ export const Schema: SchemaType<Type> = {
             'id': Joi.number().positive().required(),
         }),
         body: Joi.object().keys({
-            'name': Joi.string().min(1).max(50).required().description('Название задачи'),
+            'name': Joi.string().min(1).max(255).required().description('Название задачи'),
         })
     },
 }

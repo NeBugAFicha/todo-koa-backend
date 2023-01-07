@@ -37,3 +37,5 @@ app.listen(port, async () => {
 process.on('uncaughtException', (error: Error) => {
     console.error('Uncaught Exception!', error.message);
 });
+
+export = app;
