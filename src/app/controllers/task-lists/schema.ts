@@ -5,7 +5,7 @@ import {Type} from './type';
 export const Schema: SchemaType<Type> =  {
     create: {
         body: Joi.object().keys({
-            'name': Joi.string().min(1).max(50).required().description('Название списка задач'),
+            'name': Joi.string().min(1).max(255).required().description('Название списка задач'),
         })
     },
     findById: {

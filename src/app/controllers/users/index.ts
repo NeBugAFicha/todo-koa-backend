@@ -18,7 +18,7 @@ class User implements Methods{
             data: {login, password}, 
         });
 
-        ctx.body = { token: jwt.sign(result, process.env.JWT_SECRET_KEY)};
+        ctx.body = { data: {token: jwt.sign(result, process.env.JWT_SECRET_KEY)} };
     };
 
     logIn: Methods['logIn'] = async (ctx) => {
