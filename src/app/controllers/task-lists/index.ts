@@ -4,8 +4,6 @@ import { ControllerMethods } from '../Types';
 import { Type } from './type';
 import { Router } from './router';
 import { Schema } from './schema';
-import { empty } from '@prisma/client/runtime';
-import { RestartProcess } from 'concurrently';
 
 type Methods = ControllerMethods<Type>;
 class TaskList implements Methods{
