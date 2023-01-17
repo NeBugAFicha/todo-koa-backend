@@ -1,4 +1,4 @@
-package-lock.json
-node_modules/
-dist/
-.env
+src/node_modules
+src/dist/
+src/.env
+src/.env.example

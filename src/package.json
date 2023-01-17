@@ -7,16 +7,15 @@
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development node dist/index.js",
     "build": "tsc",
-    "test": "jest",
-    "migrate": "npx prisma migrate dev --name init",
-    "resetdb": "npx prisma migrate reset"
+    "test": "npm run resetdb && npm run build && jest",
+    "migrate": "prisma migrate dev --name init",
+    "resetdb": "prisma migrate reset --force"
   },
   "author": "me",
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^4.0.0",
     "@prisma/client": "^4.8.0",
-    "@types/joi": "^17.2.3",
     "@types/koa": "^2.13.5",
     "@types/koa-router": "^7.4.4",
     "bcrypt": "^5.1.0",
