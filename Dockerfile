@@ -1,8 +1,9 @@
-FROM node:16.19.0
-ADD src /app/
-WORKDIR app/
+FROM node:18.13.0 
 
-RUN npm install
+COPY src src
+WORKDIR src
+
+RUN npm ci
 RUN npx prisma generate
 RUN npm run build
 

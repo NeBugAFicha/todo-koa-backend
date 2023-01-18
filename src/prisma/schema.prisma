@@ -10,7 +10,7 @@ datasource db {
 
 model grants {
   id                    Int                     @id @db.SmallInt
-  name                  String                  @unique @db.VarChar(50)
+  name                  String                  @unique @db.VarChar(100)
   user_grant_task_lists user_grant_task_lists[]
 }
 
