@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  postgres_prisma:
+  postgres-prisma:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: admin
