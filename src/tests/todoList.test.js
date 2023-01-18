@@ -1,6 +1,8 @@
 const request = require('supertest');
 const { server: app } = require('../dist');
 
+//to test manually with remote POSTGRES server
+jest.setTimeout(30000);
 describe('todoList test', () => {
   beforeAll(async () => {
     console.log('Start Jest!');

@@ -7,4 +7,4 @@ RUN npm ci
 RUN npx prisma generate
 RUN npm run build
 
-ENTRYPOINT npm test
+ENTRYPOINT npm start
