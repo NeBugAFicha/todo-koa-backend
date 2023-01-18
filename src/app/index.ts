@@ -31,10 +31,7 @@ export const server = app.listen(port, async () => {
     console.error('Server starting error:', { message: err.message });
     process.exit(1);
   }
-  console.info(
-    `Server start listening (startup time: ${Date.now() - start}ms)`,
-    { port },
-  );
+  console.info(`Server start listening (startup time: ${Date.now() - start}ms)`, { port });
 });
 
 process.on('uncaughtException', (error: Error) => {

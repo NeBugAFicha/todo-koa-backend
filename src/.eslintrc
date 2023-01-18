@@ -1,0 +1,8 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:prettier/recommended","plugin:@typescript-eslint/recommended"],
+  "ignorePatterns": ["**/*.js","/.git","/.vscode","/src/node_modules/"],
+  "rules": {
+    "prefer-const": "warn"
+  }
+}
