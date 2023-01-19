@@ -2,10 +2,12 @@
 
 - Установить Docker;
 - Зайти в папку приложение "todo-koa-backend"
-- В терминале прописать docker-compose up -d
+- В терминале прописать docker compose -f render.yaml up --build -d
 - После того как докер создаст два контейнера, прописать в терминале: 
   docker exec nodejs npm run migrate
 - Все, готово, приложение крутится на localhost:8000, данные для входа в базу есть в файле docker-compose.yml. В базе данных уже находятся два юзера "EgorDeveloper" и "AnotherUser", у обоих пользователей пароль "12341234"
+## Возможность протестировать backend так же можно с помощью урла https://todo-koa-backend.onrender.com
+Предварительно туда уже были два юзера "EgorDeveloper" и "AnotherUser", у обоих пользователей пароль "12341234"
 ## API приложения
 
 ### ВСЕ РУТЫ КРОМЕ /registration, /login должны использоваться вместе с параметром token в headers

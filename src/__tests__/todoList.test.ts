@@ -1,5 +1,5 @@
-const request = require('supertest');
-const { server: app } = require('../dist');
+import request from 'supertest';
+import { server as app } from '../app';
 
 //to test manually with remote POSTGRES server
 jest.setTimeout(30000);
