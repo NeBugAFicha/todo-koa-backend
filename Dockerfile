@@ -1,10 +1,11 @@
-FROM node:18.13.0 
+FROM node:18.13.0-alpine
 
-COPY src src
+
 WORKDIR src
+COPY ./src/ /src/
 
-RUN npm ci
-RUN npx prisma generate
-RUN npm run build
+RUN npm ci \
+        && npx prisma generate \
+        && npm run build  
 
 ENTRYPOINT npm start
